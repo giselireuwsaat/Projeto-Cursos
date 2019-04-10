@@ -1,4 +1,9 @@
 <?php
+include "inc/head.php";
+include "inc/header.php";
+require "inc/funcoes.php"; 
+// require serve para chamar função
+
 $nomeCompleto = $_REQUEST["nomeCompleto"];
 $CPF = $_REQUEST["CPF"];
 $nroCartao = $_REQUEST["nroCartao"];
@@ -8,59 +13,12 @@ $nomeCurso = $_REQUEST["nomeCurso"];
 $precoCurso = $_REQUEST["precoCurso"];
 $erros =[];
 
-//funções
 
-function validadorNome($nomeCompleto) {
-    return strlen ($nomeCompleto) > 0 && strlen ($nomeCompleto) <=15; 
-    // strlen pega o tamanho da string
-}
-
-function validadorCpf($CPF){
-    return strlen ($CPF) == 11;
-}
-
-function validadorNroCartao($nroCartao){
-    $primeiroNum = substr($nroCartao,0,1);
-    return $primeiroNum ==4 || $primeiroNum ==5 || $primeiroNum ==6;
-}
-
-function validadorData($data){
-    $dataAtual = date("Y-m");
-    return $data >= $dataAtual;
-}
-
-//Y pega o ano todo = 2019 y pega 19
-
-function validadorCvv($CVV){
-    return strlen ($CVV) == 3;
-}
-
-function validadorCompra($nomeCompleto,$CPF,$nroCartao,$validade,$CVV){
-   global $erros;
-   
-   if(!validadorNome($nomeCompleto)){
-       array_push($erros,"Preencha seu nome");
-   }
-
-   if(!validadorCpf($CPF)){
-    array_push($erros,"11 numeros animal");
-   }
-
-   if(!validadorNroCartao($nroCartao)){
-    array_push($erros,"comeca com 4 5 ou 6");
-   }
-    
-   if(!validadorData($validade)){
-    array_push($erros,"esta vencido");
-   }
-
-   if(!validadorCVV($CVV)){
-    array_push($erros,"3 caracteres");
-   }
-
-}
 
 validadorCompra($nomeCompleto,$CPF,$nroCartao,$validade,$CVV);
+?>
+
+<!-- // print_r($erros); mostrar a array
 
 //substr pega um caractere a partir de um momento... igual a função do excel ext.texto...pega parte
 
@@ -75,25 +33,12 @@ validadorCompra($nomeCompleto,$CPF,$nroCartao,$validade,$CVV);
 // exit;
 
 // var_dump(validadorData($validade));
-// exit;
+// exit; -->
 
 
-?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
 
-<body>
     <div class="container">
         <div class="col-md-6 col-md-offset-3">
             <?php if (count($erros)>0) :?>
@@ -144,8 +89,5 @@ validadorCompra($nomeCompleto,$CPF,$nroCartao,$validade,$CVV);
 
     </div>
 
+<?php include "inc/footer.php";?>
 
-
-</body>
-
-</html>
