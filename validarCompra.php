@@ -1,7 +1,7 @@
 <?php
 include "inc/head.php";
 include "inc/header.php";
-require "inc/funcoes.php"; 
+require "rec/funcoesValidacoes.php"; 
 // require serve para chamar função
 
 $nomeCompleto = $_REQUEST["nomeCompleto"];
