@@ -1,11 +1,13 @@
 <?php
-// isso é array comum
-$usuario = [
-    "Nome" => "Thomaz",
-    "Email" => "teste@teste.com",
-    "Senha" => "123456",
-    "NivelAcesso" => mt_rand(0,1)
-];
+session_start();
+$nomeLogado = $_SESSION["nome"];
+$emailLogado = $_SESSION["email"];
+$nivelAcesso =$_SESSION ["nivelAcesso"];
+// isset verifica se a variavel esta definida
+if(!isset($_SESSION["logado"])){
+    header("Location:login.php");
+}
+
 
 ?>
 
@@ -19,14 +21,14 @@ $usuario = [
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <?php if ($usuario ["NivelAcesso"]==1) : ?>
+                <?php if ($nivelAcesso==1) : ?>
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">Ações <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Adicionar Produto</a></li>
-                            <li><a href="#">Editar Produto</a></li>
+                            <li><a href="adicionarProduto.php">Adicionar Produto</a></li>
+                            <li><a href="editarProduto.php">Editar Produto</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -46,8 +48,9 @@ $usuario = [
                 <p class="navbar-text navbar-right">
                     Logado como
                     <strong>
-                        <a href="#" class="navbar-link"> <?php echo $usuario ["Nome"];?> </a>
+                        <a href="usuarios.php" class="navbar-link"> <?php echo $nomeLogado ;?> </a>
                     </strong>
+                    <a href="inc/logout.php" class="btn btn-danger">Logout</a>
                 </p>
 
 

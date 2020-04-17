@@ -1,16 +1,29 @@
 <?php
+require "req/database.php";
 require "req/funcoesLogin.php";
 include "inc/head.php";
 
-if($_REQUEST){
+if(isset($_REQUEST['email']) && $_REQUEST ['email'] ){
     //pegando os valores dos inputs
     $email = $_REQUEST["email"];
     $senha = $_REQUEST["senha"];
 //verificando se o usuario esta logado atraves da funcao
-    $estaLogado = logarUsuario($email,$senha);
+    $infoLogado = logarUsuario($email,$senha);
 
 
-if($estaLogado==true) {
+if($infoLogado==true) {
+//criar a sessao
+session_start();
+//criando o campo nome na sessão
+$_SESSION["nome"] = $infoLogado['nomeUsuario'];
+//criando o campo email na sessão
+$_SESSION["email"] = $email;
+$_SESSION ["nivelAcesso"] = $infoLogado['tipoUsuario'];
+$_SESSION ["logado"] = true;
+header("Locantion:index.php");
+
+
+
     // função header serve para mandar o index
     header("location: index.php");
 } else {

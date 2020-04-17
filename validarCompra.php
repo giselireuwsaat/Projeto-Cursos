@@ -1,7 +1,7 @@
 <?php
 include "inc/head.php";
 include "inc/header.php";
-require "rec/funcoesValidacoes.php"; 
+require "req/funcoesValidacoes.php"; 
 // require serve para chamar função
 
 $nomeCompleto = $_REQUEST["nomeCompleto"];
@@ -71,9 +71,10 @@ validadorCompra($nomeCompleto,$CPF,$nroCartao,$validade,$CVV);
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-                        <li class="list-group-item"><strong>Nome Curso:</strong> <?=$nomeCurso;?> </li>
+                        <li class="list-group-item"><strong>Nome Curso:</strong> <?php echo $nomeCurso;?> </li>
+                       
                         <li class="list-group-item"><strong>Preço: R$</strong> <?php echo $precoCurso; ?></li>
-                        <li class="list-group-item"><strong>Nome Completo:</strong> <?php echo $nome; ?></li>
+                        <li class="list-group-item"><strong>Nome Completo:</strong> <?php echo $nomeCompleto; ?></li>
                     </ul>
                     <div class="center"><a href="index.php">voltar para home</a>
                     </div>
