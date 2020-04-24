@@ -3,16 +3,25 @@
     include "inc/header.php";
     include "req/database.php";
 
-    try {
-        $query = $conexao->query('SELECT * FROM cursos'); //consulta banco de dados
+    // $cursos = [
+    //     "Full Stack" => ["Curso de desenvolvimento web", 1000.99, "full.jpeg", "fullstack"],
+    //     "Marketing Digital" => ["Curso de Marketing", 1000.98, "marketing.jpg", "marketing"],
+    //     "UX" => ["Curso de User Experience", 9000.98, "ux.jpg", "ux"],
+    //     "Mobile Android" => ["Curso de apps", 1000.97, "android.png", "android"]
+    // ];
 
-        $cursos = $query->fetchAll(PDO::FETCH_ASSOC); // traz todas as linhas em array associativo
+    try {
+        $db = new PDO($dsn, $db_user, $db_pass);
         
-        $conexao = null;
+        $query = $db->query('SELECT * from cursos');
+        
+        $cursos = $query->fetchAll(PDO::FETCH_ASSOC);
+        // var_dump($cursos);
+        $db = null;
     } catch ( PDOException $Exception ) {
         echo $Exception->getMessage();
     }
-
+    
 ?>
 
    
@@ -46,11 +55,11 @@
                         <h4 class="modal-title">Preencha o seus dados</h4>
                         </div>
                         <div class="modal-body">
-                            <h4> Curso de: <?php echo $infosCurso['nome']; ?> </h4>
-                            <h4> Preço: R$ <?php echo $infosCurso['preco']; ?> </h4>
+                            <h4> Curso de: <?php echo $nomeCurso; ?> </h4>
+                            <h4> Preço: R$ <?php echo $infosCurso[1]; ?> </h4>
                             <form action="validarCompra.php" method="post">
-                                <input type="hidden" name="nomeCurso" value="<?php echo $infosCurso['nome']; ?>">
-                                <input type="hidden" name="precoCurso" value="<?php echo $infosCurso['preco']; ?>">
+                                <input type="hidden" name="nomeCurso" value="<?php echo $nomeCurso; ?>">
+                                <input type="hidden" name="precoCurso" value="<?php echo $infosCurso[1]; ?>">
                                 <div class="input-group col-md-5">
                                     <label for="nomeCompleto">Nome Completo</label>
                                     <input id="nomeCompleto" name="nomeCompleto" type="text" class="form-control">
