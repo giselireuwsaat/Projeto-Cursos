@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php 
     include "inc/head.php";
     include "inc/header.php";
@@ -15,6 +16,26 @@
     
 
     validarCompra($nome, $cpf, $nroCartao, $validade, $cvv);
+=======
+<?php
+include "inc/head.php";
+include "inc/header.php";
+require "req/funcoesValidacoes.php"; 
+// require serve para chamar função
+
+$nomeCompleto = $_REQUEST["nomeCompleto"];
+$CPF = $_REQUEST["CPF"];
+$nroCartao = $_REQUEST["nroCartao"];
+$validade = $_REQUEST["validade"];
+$CVV = $_REQUEST["CVV"];
+$nomeCurso = $_REQUEST["nomeCurso"];
+$precoCurso = $_REQUEST["precoCurso"];
+$erros =[];
+
+
+
+validadorCompra($nomeCompleto,$CPF,$nroCartao,$validade,$CVV);
+>>>>>>> 50f68a5f366d4579e4be51ce09f2bccae764306a
 ?>
 
     <div class="container">
@@ -37,6 +58,7 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
             <?php else : ?>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -51,6 +73,26 @@
                         <div class="center">
                             <a href="index.php">Voltar para home</a>
                         </div>
+=======
+
+
+
+            </div>
+            <?php else: ?>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span> Compra realizada com sucesso </span>
+
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Nome Curso:</strong> <?php echo $nomeCurso;?> </li>
+                       
+                        <li class="list-group-item"><strong>Preço: R$</strong> <?php echo $precoCurso; ?></li>
+                        <li class="list-group-item"><strong>Nome Completo:</strong> <?php echo $nomeCompleto; ?></li>
+                    </ul>
+                    <div class="center"><a href="index.php">voltar para home</a>
+>>>>>>> 50f68a5f366d4579e4be51ce09f2bccae764306a
                     </div>
                 </div>
             <?php endif; ?>
